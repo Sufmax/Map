@@ -85,6 +85,19 @@ function MapEventHandler({ onLocationClick }) {
   return null;
 }
 
+// Component to handle map center and zoom changes
+function MapController({ center, zoom }) {
+  const map = useMap();
+  
+  useEffect(() => {
+    if (center && zoom) {
+      map.setView(center, zoom, { animate: true, duration: 1 });
+    }
+  }, [map, center, zoom]);
+  
+  return null;
+}
+
 // Language selector component
 const LanguageSelector = ({ currentLanguage, onLanguageChange }) => {
   return (
