@@ -287,8 +287,9 @@ function App() {
   }, []);
 
   const handleSearch = useCallback((location) => {
+    // First, center and zoom the map to the location
     setMapCenter([location.lat, location.lng]);
-    setMapZoom(12);
+    setMapZoom(14); // Higher zoom level for better view
     setSelectedLocation(location);
     
     // Add marker for searched location - keep multiple search markers
@@ -298,6 +299,12 @@ function App() {
       name: location.name || `${t.searchMarker}${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`
     };
     setSearchMarkers(prev => [newMarker, ...prev.slice(0, 4)]); // Keep max 5 search markers
+    
+    // Force map to update center and zoom
+    setTimeout(() => {
+      setMapCenter([location.lat, location.lng]);
+      setMapZoom(14);
+    }, 100);
   }, [t]);
 
   const handleLocationClick = useCallback((location) => {
