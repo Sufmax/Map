@@ -316,19 +316,16 @@ function App() {
   const handleLanguageChange = useCallback((newLanguage) => {
     setLanguage(newLanguage);
     
-    // Update current layer URL for the new language
+    // Update current layer URL and name for the new language, but preserve the URL pattern
     setCurrentLayer(prev => ({
       ...prev,
       name: translations[newLanguage][prev.id === 'street' ? 'streetView' : prev.id === 'satellite' ? 'satelliteView' : 'terrainView'],
       url: prev.id === 'street' 
-        ? (newLanguage === 'fr' 
-            ? 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
-            : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+        ? `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?lang=${newLanguage}`
         : prev.url
     }));
     
-    // Force map re-render to load tiles with new language
-    setKey(prev => prev + 1);
+    // Don't force map re-render to preserve current position
   }, []);
 
   const handleSearch = useCallback((location) => {
