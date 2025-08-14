@@ -428,13 +428,10 @@ body {
   }
 
   .header-top {
-    flex-direction: column;
+    flex-direction: row;
     gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .language-selector {
-    align-self: flex-end;
+    align-items: center;
+    justify-content: flex-start;
   }
 }
 
