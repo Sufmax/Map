@@ -387,7 +387,6 @@ function App() {
               <MapPin className="logo-icon" size={32} />
               <h1 className="app-title">{t.appTitle}</h1>
             </div>
-            <LanguageSelector currentLanguage={language} onLanguageChange={handleLanguageChange} />
           </div>
           <p className="app-subtitle">{t.appSubtitle}</p>
         </div>
