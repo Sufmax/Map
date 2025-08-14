@@ -264,21 +264,26 @@ function App() {
   });
   const [searchMarkers, setSearchMarkers] = useState([]);
   const [clickMarker, setClickMarker] = useState(null); // Only one click marker at a time
+  const [key, setKey] = useState(0); // Force re-render of map when language changes
 
   const t = translations[language];
 
   const handleLanguageChange = useCallback((newLanguage) => {
     setLanguage(newLanguage);
-    // Update current layer name with new language
-    const layerNames = {
-      street: translations[newLanguage].streetView,
-      satellite: translations[newLanguage].satelliteView, 
-      terrain: translations[newLanguage].terrainView
-    };
+    
+    // Update current layer URL for the new language
     setCurrentLayer(prev => ({
       ...prev,
-      name: layerNames[prev.id]
+      name: translations[newLanguage][prev.id === 'street' ? 'streetView' : prev.id === 'satellite' ? 'satelliteView' : 'terrainView'],
+      url: prev.id === 'street' 
+        ? (newLanguage === 'fr' 
+            ? 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
+            : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+        : prev.url
     }));
+    
+    // Force map re-render to load tiles with new language
+    setKey(prev => prev + 1);
   }, []);
 
   const handleSearch = useCallback((location) => {
