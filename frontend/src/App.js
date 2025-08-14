@@ -22,6 +22,58 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
+// Translations
+const translations = {
+  fr: {
+    appTitle: "Globe Interactif",
+    appSubtitle: "Explorez le monde avec des cartes satellites et des données géographiques en temps réel",
+    searchPlaceholder: "Rechercher un lieu...",
+    searchButton: "Rechercher",
+    searching: "Recherche...",
+    streetView: "Vue Carte",
+    satelliteView: "Vue Satellite",
+    terrainView: "Vue Terrain",
+    locationInfo: "Informations de localisation",
+    latitude: "Latitude",
+    longitude: "Longitude",
+    place: "Lieu",
+    markers: "Marqueurs",
+    zoom: "Zoom",
+    view: "Vue",
+    locationNotFound: "Lieu non trouvé. Essayez avec un autre terme de recherche.",
+    searchError: "Erreur lors de la recherche. Veuillez réessayer.",
+    clickMarker: "Clic: ",
+    searchMarker: "Recherche: ",
+    mapData: "Données cartographiques",
+    contributors: "contributors",
+    satelliteImages: "Images satellite"
+  },
+  en: {
+    appTitle: "Interactive Globe",
+    appSubtitle: "Explore the world with satellite maps and real-time geographic data",
+    searchPlaceholder: "Search for a location...",
+    searchButton: "Search",
+    searching: "Searching...",
+    streetView: "Street View",
+    satelliteView: "Satellite View", 
+    terrainView: "Terrain View",
+    locationInfo: "Location Information",
+    latitude: "Latitude",
+    longitude: "Longitude",
+    place: "Place",
+    markers: "Markers",
+    zoom: "Zoom",
+    view: "View",
+    locationNotFound: "Location not found. Try with another search term.",
+    searchError: "Search error. Please try again.",
+    clickMarker: "Click: ",
+    searchMarker: "Search: ",
+    mapData: "Map data",
+    contributors: "contributors",
+    satelliteImages: "Satellite images"
+  }
+};
+
 // Component to handle map events
 function MapEventHandler({ onLocationClick }) {
   useMapEvents({
