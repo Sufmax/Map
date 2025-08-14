@@ -227,7 +227,8 @@ const MapControls = ({ currentView, onLayerChange, onCenterMap, language, onLang
 
   const languages = [
     { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'en', name: 'English', flag: '🇬🇧' }
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'es', name: 'Español', flag: '🇪🇸' }
   ];
 
   return (
