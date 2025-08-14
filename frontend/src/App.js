@@ -71,6 +71,30 @@ const translations = {
     mapData: "Map data",
     contributors: "contributors",
     satelliteImages: "Satellite images"
+  },
+  es: {
+    appTitle: "Globo Interactivo",
+    appSubtitle: "Explora el mundo con mapas satelitales y datos geográficos en tiempo real",
+    searchPlaceholder: "Buscar una ubicación...",
+    searchButton: "Buscar",
+    searching: "Buscando...",
+    streetView: "Vista Callejera",
+    satelliteView: "Vista Satélite",
+    terrainView: "Vista Terreno",
+    locationInfo: "Información de ubicación",
+    latitude: "Latitud",
+    longitude: "Longitud",
+    place: "Lugar",
+    markers: "Marcadores",
+    zoom: "Zoom",
+    view: "Vista",
+    locationNotFound: "Ubicación no encontrada. Intenta con otro término de búsqueda.",
+    searchError: "Error en la búsqueda. Por favor intenta de nuevo.",
+    clickMarker: "Clic: ",
+    searchMarker: "Búsqueda: ",
+    mapData: "Datos del mapa",
+    contributors: "contribuidores",
+    satelliteImages: "Imágenes satelitales"
   }
 };
 
