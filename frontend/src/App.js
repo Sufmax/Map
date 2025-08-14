@@ -178,17 +178,16 @@ const SearchBox = ({ onSearch, language }) => {
 };
 
 // Component for map controls
-const MapControls = ({ currentView, onLayerChange, onCenterMap, language }) => {
+const MapControls = ({ currentView, onLayerChange, onCenterMap, language, onLanguageChange }) => {
   const [showLayers, setShowLayers] = useState(false);
+  const [showLanguages, setShowLanguages] = useState(false);
   const t = translations[language];
 
   const mapLayers = [
     { 
       id: 'street', 
       name: t.streetView, 
-      url: language === 'fr' 
-        ? 'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png'
-        : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      url: `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?lang=${language}`
     },
     { 
       id: 'satellite', 
@@ -200,6 +199,11 @@ const MapControls = ({ currentView, onLayerChange, onCenterMap, language }) => {
       name: t.terrainView, 
       url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png' 
     }
+  ];
+
+  const languages = [
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'en', name: 'English', flag: '🇬🇧' }
   ];
 
   return (
@@ -225,6 +229,34 @@ const MapControls = ({ currentView, onLayerChange, onCenterMap, language }) => {
                 }}
               >
                 {layer.name}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="control-group">
+        <button 
+          className="control-button"
+          onClick={() => setShowLanguages(!showLanguages)}
+          title="Changer la langue"
+        >
+          <Globe size={20} />
+        </button>
+        
+        {showLanguages && (
+          <div className="layers-menu">
+            {languages.map(lang => (
+              <button
+                key={lang.code}
+                className={`layer-option ${language === lang.code ? 'active' : ''}`}
+                onClick={() => {
+                  onLanguageChange(lang.code);
+                  setShowLanguages(false);
+                }}
+              >
+                <span className="language-flag">{lang.flag}</span>
+                {lang.name}
               </button>
             ))}
           </div>
