@@ -34,11 +34,17 @@ body {
   margin: 0 auto;
 }
 
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
 .logo-section {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 0.5rem;
 }
 
 .logo-icon {
