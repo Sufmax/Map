@@ -85,6 +85,23 @@ function MapEventHandler({ onLocationClick }) {
   return null;
 }
 
+// Language selector component
+const LanguageSelector = ({ currentLanguage, onLanguageChange }) => {
+  return (
+    <div className="language-selector">
+      <Globe size={18} />
+      <select 
+        value={currentLanguage} 
+        onChange={(e) => onLanguageChange(e.target.value)}
+        className="language-select"
+      >
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  );
+};
+
 // Component to handle location search
 const SearchBox = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
