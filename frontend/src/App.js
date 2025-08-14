@@ -216,21 +216,22 @@ const MapControls = ({ currentView, onLayerChange, onCenterMap, language }) => {
 };
 
 // Info panel component
-const InfoPanel = ({ selectedLocation, clickedLocation }) => {
+const InfoPanel = ({ selectedLocation, clickedLocation, language }) => {
   if (!selectedLocation && !clickedLocation) return null;
 
   const location = selectedLocation || clickedLocation;
+  const t = translations[language];
   
   return (
     <div className="info-panel">
       <div className="info-header">
         <Info size={18} />
-        <h3>Informations de localisation</h3>
+        <h3>{t.locationInfo}</h3>
       </div>
       <div className="info-content">
-        <p><strong>Latitude:</strong> {location.lat.toFixed(6)}</p>
-        <p><strong>Longitude:</strong> {location.lng.toFixed(6)}</p>
-        {location.name && <p><strong>Lieu:</strong> {location.name}</p>}
+        <p><strong>{t.latitude}:</strong> {location.lat.toFixed(6)}</p>
+        <p><strong>{t.longitude}:</strong> {location.lng.toFixed(6)}</p>
+        {location.name && <p><strong>{t.place}:</strong> {location.name}</p>}
       </div>
     </div>
   );
