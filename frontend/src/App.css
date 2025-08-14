@@ -417,8 +417,18 @@ body {
   }
   
   .app-subtitle {
+    font-size: 1rem;
     margin-left: 0;
-    font-size: 0.95rem;
+  }
+
+  .header-top {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .language-selector {
+    align-self: flex-end;
   }
 }
 
