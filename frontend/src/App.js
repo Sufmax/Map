@@ -98,22 +98,22 @@ function MapController({ center, zoom }) {
   return null;
 }
 
-// Language selector component
-const LanguageSelector = ({ currentLanguage, onLanguageChange }) => {
-  return (
-    <div className="language-selector">
-      <Globe size={18} />
-      <select 
-        value={currentLanguage} 
-        onChange={(e) => onLanguageChange(e.target.value)}
-        className="language-select"
-      >
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-      </select>
-    </div>
-  );
-};
+// Language selector component (now removed as it's in map controls)
+// const LanguageSelector = ({ currentLanguage, onLanguageChange }) => {
+//   return (
+//     <div className="language-selector">
+//       <Globe size={18} />
+//       <select 
+//         value={currentLanguage} 
+//         onChange={(e) => onLanguageChange(e.target.value)}
+//         className="language-select"
+//       >
+//         <option value="fr">Français</option>
+//         <option value="en">English</option>
+//       </select>
+//     </div>
+//   );
+// };
 
 // Component to handle location search
 const SearchBox = ({ onSearch, language }) => {
