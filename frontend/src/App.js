@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import "./App.css";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
-import { Search, Navigation, Layers, MapPin, Info } from "lucide-react";
+import { Search, Navigation, Layers, MapPin, Info, Globe } from "lucide-react";
 import L from "leaflet";
 
 // Import Leaflet CSS
