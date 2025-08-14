@@ -68,8 +68,8 @@ body {
   margin-left: 3rem;
 }
 
-/* Language Selector */
-.language-selector {
+/* Language Selector - Now removed from header */
+/*.language-selector {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -98,6 +98,12 @@ body {
 
 .language-select:hover {
   color: #667eea;
+}*/
+
+/* Language flag in menu */
+.language-flag {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
 }
 
 /* Main Content */
