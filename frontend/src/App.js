@@ -238,6 +238,7 @@ const InfoPanel = ({ selectedLocation, clickedLocation, language }) => {
 };
 
 function App() {
+  const [language, setLanguage] = useState('fr');
   const [mapCenter, setMapCenter] = useState([46.603354, 1.888334]); // France center
   const [mapZoom, setMapZoom] = useState(6);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -247,33 +248,50 @@ function App() {
     name: 'Vue Carte',
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
   });
-  const [markers, setMarkers] = useState([]);
+  const [searchMarkers, setSearchMarkers] = useState([]);
+  const [clickMarker, setClickMarker] = useState(null); // Only one click marker at a time
+
+  const t = translations[language];
+
+  const handleLanguageChange = useCallback((newLanguage) => {
+    setLanguage(newLanguage);
+    // Update current layer name with new language
+    const layerNames = {
+      street: translations[newLanguage].streetView,
+      satellite: translations[newLanguage].satelliteView, 
+      terrain: translations[newLanguage].terrainView
+    };
+    setCurrentLayer(prev => ({
+      ...prev,
+      name: layerNames[prev.id]
+    }));
+  }, []);
 
   const handleSearch = useCallback((location) => {
     setMapCenter([location.lat, location.lng]);
     setMapZoom(12);
     setSelectedLocation(location);
     
-    // Add marker for searched location
+    // Add marker for searched location - keep multiple search markers
     const newMarker = {
       id: Date.now(),
       position: [location.lat, location.lng],
-      name: location.name || `Recherche: ${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`
+      name: location.name || `${t.searchMarker}${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`
     };
-    setMarkers(prev => [newMarker, ...prev.slice(0, 4)]); // Keep max 5 markers
-  }, []);
+    setSearchMarkers(prev => [newMarker, ...prev.slice(0, 4)]); // Keep max 5 search markers
+  }, [t]);
 
   const handleLocationClick = useCallback((location) => {
     setClickedLocation(location);
     
-    // Add marker for clicked location
+    // Replace any existing click marker with new one
     const newMarker = {
       id: Date.now(),
       position: [location.lat, location.lng],
-      name: `Clic: ${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`
+      name: `${t.clickMarker}${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}`
     };
-    setMarkers(prev => [newMarker, ...prev.slice(0, 4)]); // Keep max 5 markers
-  }, []);
+    setClickMarker(newMarker); // Only one click marker at a time
+  }, [t]);
 
   const handleLayerChange = useCallback((layer) => {
     setCurrentLayer(layer);
@@ -285,6 +303,12 @@ function App() {
     setSelectedLocation(null);
     setClickedLocation(null);
   }, []);
+
+  // Combine all markers for display
+  const allMarkers = [
+    ...searchMarkers,
+    ...(clickMarker ? [clickMarker] : [])
+  ];
 
   return (
     <div className="App">
