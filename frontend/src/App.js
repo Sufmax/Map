@@ -103,9 +103,10 @@ const LanguageSelector = ({ currentLanguage, onLanguageChange }) => {
 };
 
 // Component to handle location search
-const SearchBox = ({ onSearch }) => {
+const SearchBox = ({ onSearch, language }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const t = translations[language];
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -115,7 +116,7 @@ const SearchBox = ({ onSearch }) => {
     try {
       // Using Nominatim API (free OpenStreetMap geocoding)
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}&limit=1`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchTerm)}&limit=1&accept-language=${language}`
       );
       const data = await response.json();
       
@@ -127,11 +128,11 @@ const SearchBox = ({ onSearch }) => {
           name: result.display_name
         });
       } else {
-        alert("Lieu non trouvé. Essayez avec un autre terme de recherche.");
+        alert(t.locationNotFound);
       }
     } catch (error) {
       console.error("Erreur lors de la recherche:", error);
-      alert("Erreur lors de la recherche. Veuillez réessayer.");
+      alert(t.searchError);
     } finally {
       setIsLoading(false);
     }
@@ -144,7 +145,7 @@ const SearchBox = ({ onSearch }) => {
           <Search className="search-icon" size={20} />
           <input
             type="text"
-            placeholder="Rechercher un lieu..."
+            placeholder={t.searchPlaceholder}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -156,7 +157,7 @@ const SearchBox = ({ onSearch }) => {
           className="search-button"
           disabled={isLoading || !searchTerm.trim()}
         >
-          {isLoading ? "Recherche..." : "Rechercher"}
+          {isLoading ? t.searching : t.searchButton}
         </button>
       </form>
     </div>
