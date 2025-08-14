@@ -314,17 +314,20 @@ function App() {
     <div className="App">
       <div className="app-header">
         <div className="header-content">
-          <div className="logo-section">
-            <MapPin className="logo-icon" size={32} />
-            <h1 className="app-title">Globe Interactif</h1>
+          <div className="header-top">
+            <div className="logo-section">
+              <MapPin className="logo-icon" size={32} />
+              <h1 className="app-title">{t.appTitle}</h1>
+            </div>
+            <LanguageSelector currentLanguage={language} onLanguageChange={handleLanguageChange} />
           </div>
-          <p className="app-subtitle">Explorez le monde avec des cartes satellites et des données géographiques en temps réel</p>
+          <p className="app-subtitle">{t.appSubtitle}</p>
         </div>
       </div>
 
       <div className="main-content">
         <div className="map-section">
-          <SearchBox onSearch={handleSearch} />
+          <SearchBox onSearch={handleSearch} language={language} />
           
           <div className="map-wrapper">
             <MapContainer
@@ -339,21 +342,21 @@ function App() {
               <TileLayer
                 url={currentLayer.url}
                 attribution={currentLayer.id === 'satellite' 
-                  ? '&copy; <a href="https://www.esri.com/">Esri</a>' 
-                  : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  ? `&copy; <a href="https://www.esri.com/">Esri</a>` 
+                  : `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ${t.contributors}`
                 }
                 maxZoom={18}
               />
               
               <MapEventHandler onLocationClick={handleLocationClick} />
               
-              {markers.map((marker) => (
+              {allMarkers.map((marker) => (
                 <Marker key={marker.id} position={marker.position}>
                   <Popup>
                     <div className="popup-content">
                       <strong>{marker.name}</strong><br />
-                      Lat: {marker.position[0].toFixed(6)}<br />
-                      Lng: {marker.position[1].toFixed(6)}
+                      {t.latitude}: {marker.position[0].toFixed(6)}<br />
+                      {t.longitude}: {marker.position[1].toFixed(6)}
                     </div>
                   </Popup>
                 </Marker>
@@ -364,6 +367,7 @@ function App() {
               currentView={currentLayer.id}
               onLayerChange={handleLayerChange}
               onCenterMap={handleCenterMap}
+              language={language}
             />
           </div>
         </div>
@@ -371,16 +375,17 @@ function App() {
         <InfoPanel 
           selectedLocation={selectedLocation} 
           clickedLocation={clickedLocation}
+          language={language}
         />
       </div>
 
       <footer className="app-footer">
         <div className="footer-content">
-          <p>Données cartographiques © OpenStreetMap contributors | Images satellite © Esri</p>
+          <p>{t.mapData} © OpenStreetMap {t.contributors} | {t.satelliteImages} © Esri</p>
           <div className="footer-stats">
-            <span>Marqueurs: {markers.length}</span>
-            <span>Zoom: {mapZoom}</span>
-            <span>Vue: {currentLayer.name}</span>
+            <span>{t.markers}: {allMarkers.length}</span>
+            <span>{t.zoom}: {mapZoom}</span>
+            <span>{t.view}: {currentLayer.name}</span>
           </div>
         </div>
       </footer>
