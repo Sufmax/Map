@@ -391,11 +391,24 @@ function App() {
   }, []);
 
   const handleCenterMap = useCallback(() => {
-    setMapCenter([46.603354, 1.888334]);
-    setMapZoom(6);
-    setSelectedLocation(null);
-    setClickedLocation(null);
-  }, []);
+    // If there's a selected location, center on it
+    if (selectedLocation) {
+      setMapCenter([selectedLocation.lat, selectedLocation.lng]);
+      setMapZoom(14);
+    } 
+    // If there's a clicked location, center on it
+    else if (clickedLocation) {
+      setMapCenter([clickedLocation.lat, clickedLocation.lng]);
+      setMapZoom(14);
+    }
+    // Otherwise, go back to France (default behavior)
+    else {
+      setMapCenter([46.603354, 1.888334]);
+      setMapZoom(6);
+      setSelectedLocation(null);
+      setClickedLocation(null);
+    }
+  }, [selectedLocation, clickedLocation]);
 
   // Combine all markers for display
   const allMarkers = [
