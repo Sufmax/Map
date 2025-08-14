@@ -357,6 +357,7 @@ function App() {
           
           <div className="map-wrapper">
             <MapContainer
+              key={key} // Force re-render when language changes
               center={mapCenter}
               zoom={mapZoom}
               className="leaflet-map"
@@ -366,10 +367,13 @@ function App() {
               dragging={true}
             >
               <TileLayer
+                key={`${currentLayer.id}-${language}`} // Force re-render of tiles
                 url={currentLayer.url}
                 attribution={currentLayer.id === 'satellite' 
                   ? `&copy; <a href="https://www.esri.com/">Esri</a>` 
-                  : `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ${t.contributors}`
+                  : language === 'fr' && currentLayer.id === 'street'
+                    ? `&copy; <a href="https://www.openstreetmap.fr/">OpenStreetMap France</a> ${t.contributors}`
+                    : `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ${t.contributors}`
                 }
                 maxZoom={18}
               />
