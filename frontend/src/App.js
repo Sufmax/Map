@@ -305,7 +305,7 @@ function App() {
   const [currentLayer, setCurrentLayer] = useState({
     id: 'street',
     name: 'Vue Carte',
-    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?lang=fr'
   });
   const [searchMarkers, setSearchMarkers] = useState([]);
   const [clickMarker, setClickMarker] = useState(null); // Only one click marker at a time
