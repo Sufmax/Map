@@ -392,6 +392,7 @@ function App() {
               />
               
               <MapEventHandler onLocationClick={handleLocationClick} />
+              <MapController center={mapCenter} zoom={mapZoom} />
               
               {allMarkers.map((marker) => (
                 <Marker key={marker.id} position={marker.position}>
