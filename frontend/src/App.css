@@ -158,19 +158,20 @@ body {
 /* Map Styles */
 .map-wrapper {
   position: relative;
-  flex: 1;
   height: 600px;
   min-height: 600px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   border: 4px solid rgba(255, 255, 255, 0.2);
+  background: white;
 }
 
 .leaflet-map {
   height: 100% !important;
-  width: 100%;
+  width: 100% !important;
   z-index: 1;
+  border-radius: 16px;
 }
 
 /* Map Controls */
