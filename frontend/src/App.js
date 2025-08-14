@@ -165,13 +165,14 @@ const SearchBox = ({ onSearch, language }) => {
 };
 
 // Component for map controls
-const MapControls = ({ currentView, onLayerChange, onCenterMap }) => {
+const MapControls = ({ currentView, onLayerChange, onCenterMap, language }) => {
   const [showLayers, setShowLayers] = useState(false);
+  const t = translations[language];
 
   const mapLayers = [
-    { id: 'street', name: 'Vue Carte', url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' },
-    { id: 'satellite', name: 'Vue Satellite', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' },
-    { id: 'terrain', name: 'Vue Terrain', url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png' }
+    { id: 'street', name: t.streetView, url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' },
+    { id: 'satellite', name: t.satelliteView, url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' },
+    { id: 'terrain', name: t.terrainView, url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png' }
   ];
 
   return (
