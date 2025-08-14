@@ -437,6 +437,7 @@ function App() {
               onLayerChange={handleLayerChange}
               onCenterMap={handleCenterMap}
               language={language}
+              onLanguageChange={handleLanguageChange}
             />
           </div>
         </div>
