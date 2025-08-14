@@ -139,6 +139,8 @@ async def get_location(location_id: str):
             return Location(**location)
         else:
             raise HTTPException(status_code=404, detail="Location not found")
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching location: {str(e)}")
 
